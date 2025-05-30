@@ -1,5 +1,10 @@
 Feature: Gestão da Barbearia
 
+  Scenario: Login com credenciais inválidas
+    Given que estou na página de login
+    When preencho email "emailerrado@gmail.com" e senha "senhaerrada"
+    Then devo ver uma mensagem de erro de login
+
   Scenario: Login na aplicação
     Given que estou na página de login
     When preencho email e senha corretos
@@ -20,14 +25,19 @@ Feature: Gestão da Barbearia
     And eu excluo o serviço "Corte Atualizado"
     Then o serviço "Corte Atualizado" não deve mais estar na lista
 
+  Scenario: Buscar uma unidade inexistente
+    When acesso a página de unidades
+    And busco pela unidade "Filial"
+    Then não deve encontrar nenhuma unidade
+
   Scenario: Adicionar uma forma de pagamento
     When acesso a página de forma de pagamento
     And adiciono uma forma de pagamento com nome "Pix Teste"
     Then a forma de pagamento "Pix Teste" deve aparecer na lista
 
-  Scenario: Excluir uma forma de pagamento
+  Scenario: Buscar e excluir uma forma de pagamento
     When acesso a página de forma de pagamento
-    And eu excluo a forma de pagamento "Pix Teste"
+    And busco e excluo a forma de pagamento "Pix Teste"
     Then a forma de pagamento "Pix Teste" não deve mais estar na lista
 
   Scenario: Logout da aplicação
