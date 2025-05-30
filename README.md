@@ -1,82 +1,139 @@
-🚀 CYPRESS-CUCUMBER
-Automação de testes end-to-end utilizando Cypress integrado com Cucumber (BDD) e geração de relatórios com Mochawesome.
+# 🚀 CYPRESS + CUCUMBER + MOCHAWESOME
 
-🧠 Sobre o Projeto
-Este projeto tem como objetivo realizar testes automatizados utilizando o Cypress em conjunto com o Cucumber, seguindo a metodologia BDD (Behavior Driven Development), permitindo escrever cenários de teste em linguagem natural (Gherkin).
+![Cypress](https://img.shields.io/badge/Cypress-Testing-brightgreen)
+![Cucumber](https://img.shields.io/badge/Cucumber-BDD-blue)
+![Mochawesome](https://img.shields.io/badge/Mochawesome-Report-red)
+![Status](https://img.shields.io/badge/Status-Working-success)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-Além disso, é utilizada a geração de relatórios personalizados com cypress-mochawesome-reporter, facilitando a análise dos resultados dos testes.
+---
 
-🔧 Tecnologias e Ferramentas
-Cypress - Framework de testes E2E
+## 📜 Descrição do Projeto
 
-Cucumber (BDD) - Especificação de testes em linguagem natural
+Este projeto tem como objetivo realizar testes automatizados em uma aplicação web utilizando:
 
-@badeball/cypress-cucumber-preprocessor - Integração Cypress + Cucumber
+- ✅ **Cypress** – Framework de testes End-to-End moderno.
+- ✅ **Cucumber (BDD)** – Permite escrever os testes em linguagem natural (Gherkin).
+- ✅ **Mochawesome** – Ferramenta para geração de relatórios de testes em formatos visualmente amigáveis (HTML e JSON).
 
-Mochawesome - Geração de relatórios em HTML/JSON
+O principal foco é a aplicação de testes automatizados de forma colaborativa, legível e profissional, simulando cenários reais.
 
-esbuild - Bundler utilizado no preprocessamento dos testes
+---
 
-📂 Estrutura de Pastas
-lua
-Copiar
-Editar
-CYPRESS-CUCUMBER/
-├── cypress/
-│   ├── e2e/
-│   │   └── arquivos.feature
-│   ├── support/
-│   │   └── e2e.ts
-│   ├── reports/
-├── node_modules/
-├── cypress.config.ts
-├── package.json
-├── README.md
-🚀 Como executar o projeto
-🔸 Instalar as dependências:
-bash
-Copiar
-Editar
+## 🚀 Funcionalidades
+
+- ✔️ Escrita de testes no padrão **Gherkin (.feature)**.
+- ✔️ Integração do Cypress com o Cucumber para desenvolvimento orientado a comportamento (BDD).
+- ✔️ Geração de relatórios detalhados com **Mochawesome**.
+- ✔️ Execução dos testes tanto via interface gráfica quanto via linha de comando (headless).
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- ⚙️ [Cypress](https://docs.cypress.io/)
+- ⚙️ [@badeball/cypress-cucumber-preprocessor](https://github.com/badeball/cypress-cucumber-preprocessor)
+- ⚙️ [@bahmutov/cypress-esbuild-preprocessor](https://github.com/bahmutov/cypress-esbuild-preprocessor)
+- ⚙️ [cypress-mochawesome-reporter](https://github.com/LironEr/cypress-mochawesome-reporter)
+- ⚙️ TypeScript
+
+---
+
+## ⚙️ Instalação e Execução
+
+### 🔹 Instalar dependências
+
+```bash
 npm install
-🔸 Executar os testes no modo interativo (GUI):
+🔹 Abrir Cypress (modo interativo)
 bash
 Copiar
 Editar
 npx cypress open
-🔸 Executar os testes no modo headless (terminal):
+🔹 Executar Cypress (modo terminal/headless)
 bash
 Copiar
 Editar
 npx cypress run
-🧪 Geração de Relatórios
-Após rodar os testes no modo run, os relatórios serão gerados automaticamente na pasta:
+✍️ Exemplo de Cenário (Arquivo .feature)
+gherkin
+Copiar
+Editar
+Feature: Página de Login
+
+  Scenario: Login com sucesso
+    Given que o usuário acessa a página de login
+    When ele informa credenciais válidas
+    Then ele deve ser redirecionado para a página inicial
+🔗 Integração Cypress + Cucumber + Mochawesome
+A integração foi feita adicionando:
+
+✅ Suporte ao pré-processamento de arquivos .feature usando o Cucumber Preprocessor.
+
+✅ Utilização do esbuild para otimizar o processamento dos testes.
+
+✅ Geração automática de relatórios em JSON e HTML utilizando Mochawesome.
+
+🔥 Configuração do arquivo cypress.config.ts:
+ts
+Copiar
+Editar
+import { defineConfig } from 'cypress';
+import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
+import { addCucumberPreprocessorPlugin } from '@badeball/cypress-cucumber-preprocessor';
+import createEsbuildPlugin from '@badeball/cypress-cucumber-preprocessor/esbuild';
+import mochawesome from 'cypress-mochawesome-reporter/plugin';
+
+export default defineConfig({
+  e2e: {
+    async setupNodeEvents(on, config) {
+      await addCucumberPreprocessorPlugin(on, config);
+
+      on(
+        'file:preprocessor',
+        createBundler({
+          plugins: [createEsbuildPlugin(config)],
+        })
+      );
+
+      mochawesome(on);
+
+      return config;
+    },
+    specPattern: 'cypress/e2e/**/*.feature',
+    supportFile: 'cypress/support/e2e.ts',
+  },
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    reportDir: 'cypress/reports',
+    overwrite: false,
+    html: true,
+    json: true,
+  },
+});
+📊 Relatórios Gerados
+Após a execução dos testes, os relatórios são gerados na pasta:
 
 bash
 Copiar
 Editar
 cypress/reports/
-O relatório estará disponível em formato JSON e pode ser configurado para gerar em HTML se desejar.
+🔥 O relatório HTML contém:
+✔️ Status de cada teste (✅ Passou / ❌ Falhou).
 
-🧠 Como escrever testes no padrão BDD (Cucumber)
-Os testes são escritos no formato Gherkin, dentro de arquivos .feature. Exemplo:
+✔️ Descrição dos cenários.
 
-gherkin
-Copiar
-Editar
-Feature: Login do usuário
+✔️ Logs detalhados da execução.
 
-  Scenario: Login bem-sucedido
-    Given que o usuário acessa a página de login
-    When informa credenciais válidas
-    Then ele deve ser redirecionado para a página inicial
-Cada passo (Given, When, Then) possui sua implementação no arquivo de suporte utilizando Cypress para interagir com a aplicação.
+🖼️ Exemplo de relatório Mochawesome:
+(Insira aqui uma imagem do relatório, se desejar.)
 
-🔗 Referências
-Documentação Cypress
+🧠 Justificativa dos Testes
+✅ Uso de Cucumber (BDD) para uma escrita mais colaborativa e entendimento fácil tanto por desenvolvedores quanto stakeholders.
 
-Cucumber Preprocessor
+✅ Uso do Cypress para execução robusta de testes E2E.
 
-Mochawesome Reporter
+✅ Integração com Mochawesome para geração de relatórios profissionais e acompanhamento da qualidade dos testes.
 
-📝 Licença
-Este projeto é de caráter educacional e livre para estudo e aprimoramento.
+🏁 Conclusão
+Este projeto demonstra como estruturar testes de forma profissional, utilizando boas práticas de automação, geração de relatórios e desenvolvimento orientado a comportamento (BDD). A integração das ferramentas permite um fluxo completo e eficiente para qualidade de software.
