@@ -45,26 +45,19 @@ O principal foco é a aplicação de testes automatizados de forma colaborativa,
 
 ```bash
 npm install
-🔹 Abrir Cypress (modo interativo)
-bash
-Copiar
-Editar
-npx cypress open
-🔹 Executar Cypress (modo terminal/headless)
-bash
-Copiar
-Editar
-npx cypress run
-✍️ Exemplo de Cenário (Arquivo .feature)
-gherkin
-Copiar
-Editar
-Feature: Página de Login
+```
+### 🔹 Abrir Cypress (modo interativo)
 
-  Scenario: Login com sucesso
-    Given que o usuário acessa a página de login
-    When ele informa credenciais válidas
-    Then ele deve ser redirecionado para a página inicial
+```bash
+npx cypress open
+```
+
+### 🔹 Gerar Relatório
+
+```bash
+npx cypress run
+```
+
 🔗 Integração Cypress + Cucumber + Mochawesome
 A integração foi feita adicionando:
 
@@ -74,10 +67,9 @@ A integração foi feita adicionando:
 
 ✅ Geração automática de relatórios em JSON e HTML utilizando Mochawesome.
 
-🔥 Configuração do arquivo cypress.config.ts:
-ts
-Copiar
-Editar
+### 🔥 Configuração do arquivo cypress.config.ts
+
+```
 import { defineConfig } from 'cypress';
 import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
 import { addCucumberPreprocessorPlugin } from '@badeball/cypress-cucumber-preprocessor';
@@ -111,24 +103,24 @@ export default defineConfig({
     json: true,
   },
 });
-📊 Relatórios Gerados
+```
+## 📊 Relatórios Gerados
 Após a execução dos testes, os relatórios são gerados na pasta:
 
-bash
-Copiar
-Editar
+```bash
 cypress/reports/
+```
+
 🔥 O relatório HTML contém:
+
 ✔️ Status de cada teste (✅ Passou / ❌ Falhou).
 
 ✔️ Descrição dos cenários.
 
 ✔️ Logs detalhados da execução.
 
-🖼️ Exemplo de relatório Mochawesome:
-(Insira aqui uma imagem do relatório, se desejar.)
+### 🧠 Justificativa dos Testes
 
-🧠 Justificativa dos Testes
 ✅ Uso de Cucumber (BDD) para uma escrita mais colaborativa e entendimento fácil tanto por desenvolvedores quanto stakeholders.
 
 ✅ Uso do Cypress para execução robusta de testes E2E.
@@ -136,4 +128,4 @@ cypress/reports/
 ✅ Integração com Mochawesome para geração de relatórios profissionais e acompanhamento da qualidade dos testes.
 
 🏁 Conclusão
-Este projeto demonstra como estruturar testes de forma profissional, utilizando boas práticas de automação, geração de relatórios e desenvolvimento orientado a comportamento (BDD). A integração das ferramentas permite um fluxo completo e eficiente para qualidade de software.
+Este projeto demonstra como estruturar testes de forma profissional, utilizando boas práticas de automação, geração de relatórios e desenvolvimento orientado a comportamento (BDD). A integração das ferramentas permite um fluxo completo e eficiente para garantir a qualidade do software.
