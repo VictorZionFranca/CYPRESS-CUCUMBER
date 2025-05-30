@@ -127,5 +127,6 @@ cypress/reports/
 
 ✅ Integração com Mochawesome para geração de relatórios profissionais e acompanhamento da qualidade dos testes.
 
-🏁 Conclusão
+## 🏁 Conclusão
+
 Este projeto demonstra como estruturar testes de forma profissional, utilizando boas práticas de automação, geração de relatórios e desenvolvimento orientado a comportamento (BDD). A integração das ferramentas permite um fluxo completo e eficiente para garantir a qualidade do software.
